@@ -1,0 +1,15 @@
+.example-card {
+  max-width: calc(100% - 50px);
+  margin: 20px;
+}
+.inline-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.address-form{
+  width: 45%;
+}
+.full-width {
+  width: 100%;
+}

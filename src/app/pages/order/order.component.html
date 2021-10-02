@@ -1,0 +1,57 @@
+
+<mat-card class="example-card">
+
+  <mat-card-title>Ny bestilling</mat-card-title>
+
+<mat-stepper orientation="vertical">
+  <mat-step>
+    <ng-template matStepLabel>Kunde</ng-template>
+    <ng-template matStepContent>
+      Legg til ny kunde eller velg fra<button mat-button (click)="showCustomers()">eksisterende kunder</button>
+      <app-customer></app-customer>
+      <button mat-button matStepperNext>Neste</button>
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Adresse</ng-template>
+    <ng-template matStepContent>
+      <div class="inline-form">
+        <div class="address-form">
+          <h3>Legg til ny "Adresse fra" eller velg fra<button mat-button (click)="showAddresses()">eksisterende adresser</button></h3>
+          <app-address [addressType]="order.addressFrom" (addressChange)="addrssFromChanged($event)" ></app-address>
+        </div>
+        <div class="address-form">
+        <h3>Legg til ny "Adresse til" eller velg fra<button mat-button (click)="showAddresses()">eksisterende adresser</button></h3>
+          <app-address [addressType]="order.addressTo" (addressChange)="addrssToChanged($event)"></app-address>
+        </div>
+      </div>
+      <button mat-button matStepperPrevious>Tilbake</button>
+      <button mat-button matStepperNext>Neste</button>
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Tjenester</ng-template>
+    <p>Check the services</p>
+    <app-service [serviceTypeId]="EServiceType.Packing"></app-service>
+    <app-service [serviceTypeId]="EServiceType.Moving"></app-service>
+    <app-service [serviceTypeId]="EServiceType.Cleaning"></app-service>
+    <button mat-button matStepperPrevious>Tilbake</button>
+    <button mat-button matStepperNext>Neste</button>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Notes</ng-template>
+    <form>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Legg til notater hvis det er noen kunders krav</mat-label>
+        <textarea (change)="validateOrder($event)" matInput placeholder=""></textarea>
+      </mat-form-field>
+    </form>
+    <button mat-button matStepperPrevious>Tilbake</button>
+  </mat-step>
+</mat-stepper>
+
+  <mat-card-actions>
+    <button mat-raised-button [routerLink]="'/'">Avbryt</button>
+    <button mat-raised-button [disabled]="!isValidForm" color="primary">Lagre bestillingen</button>
+  </mat-card-actions>
+</mat-card>
