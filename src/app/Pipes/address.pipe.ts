@@ -7,7 +7,7 @@ import {IAddress} from "../interfaces/IAddress";
 export class AddressPipe implements PipeTransform {
 
   transform(a: IAddress): string {
-    return a.zip + ' ' + a.city + ' ' + a.street + ' ' + a.number;
+    return a.street + ', ' + a.zip + ' ' + a.city;
   }
 
 }

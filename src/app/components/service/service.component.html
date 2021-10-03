@@ -1,7 +1,7 @@
 <div >
   <form class="form-inline" [formGroup]="serviceForm">
   <mat-checkbox class="example-margin"
-                [checked]="selectedServiceId === serviceTypeId"
+                [checked]="isActive"
                 [color]="'primary'"
                 (change)="setService($event.checked)">
     {{serviceTypeId | serviceName}}

@@ -27,7 +27,16 @@ export class AddressComponent implements OnInit {
     this.addressForm.valueChanges.subscribe(val => {
       let address = this.addressForm.value;
       this.addressChange.next(address);
-    })
+    });
+    setTimeout(()=>{
+      this.addressForm.patchValue({
+        zip:this.address.zip,
+        city:this.address.city,
+        street:this.address.street,
+        number:this.address.number,
+        countryCode:this.address.countryCode,
+      });
+    });
   }
 
 }

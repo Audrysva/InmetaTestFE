@@ -18,6 +18,7 @@ import {CustomerComponent} from "../../components/customer/customer.component";
 import {AddressComponent} from "../../components/address/address.component";
 import {ServiceComponent} from "../../components/service/service.component";
 import {ApplicationPipesModule} from "../../Pipes/app-pipes-module";
+import {FilterByServicetypePipe} from "../../Pipes/filter-by-servicetype.pipe";
 
 
 
@@ -27,6 +28,7 @@ import {ApplicationPipesModule} from "../../Pipes/app-pipes-module";
     CustomerComponent,
     AddressComponent,
     ServiceComponent,
+    FilterByServicetypePipe
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,6 @@ import {ApplicationPipesModule} from "../../Pipes/app-pipes-module";
     ApplicationPipesModule,
     FormsModule
   ],
-  providers:[MatDatepickerModule]
+  providers:[MatDatepickerModule,FilterByServicetypePipe]
 })
 export class OrderModule { }

@@ -1,21 +1,31 @@
 <mat-card class="content-table">
-  <h3>Bestillinger</h3>
+  <div class="page-title"><h2>Bestillinger</h2></div>
   <table mat-table [dataSource]="filteredOrders" multiTemplateDataRows class="mat-elevation-z8">
+
+    <ng-container matColumnDef="Expander">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let order" (click)="expandedOrder = expandedOrder === order ? null : order">
+        <span>
+          <mat-icon aria-hidden="false" aria-label="Example home icon">more_vert</mat-icon></span>
+      </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
 
     <ng-container matColumnDef="CustomerName">
       <th mat-header-cell *matHeaderCellDef> Navn </th>
-      <td mat-cell *matCellDef="let order"> {{order.customer.name}} </td>
+      <td mat-cell *matCellDef="let order" (click)="expandedOrder = expandedOrder === order ? null : order">
+        <span> {{order.customer.name}} </span></td>
       <td mat-footer-cell *matFooterCellDef> Totalt bestillinger: {{orders.length}} </td>
     </ng-container>
 
     <ng-container matColumnDef="AddressFrom">
-      <th mat-header-cell *matHeaderCellDef> Adresse Fra </th>
+      <th mat-header-cell *matHeaderCellDef> Fra </th>
       <td mat-cell *matCellDef="let order"> {{order.addressFrom | address}} </td>
       <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
 
     <ng-container matColumnDef="AddressTo">
-      <th mat-header-cell *matHeaderCellDef> Adresse Til </th>
+      <th mat-header-cell *matHeaderCellDef> Til </th>
       <td mat-cell *matCellDef="let order"> {{order.addressTo | address}} </td>
       <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
@@ -30,12 +40,12 @@
     <ng-container matColumnDef="Actions">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let order">
-        <button class="action-button" mat-mini-fab color="primary"
-                (click)="expandedOrder = expandedOrder === order ? null : order">
-          <mat-icon aria-hidden="false">edit</mat-icon>
-        </button>
         <button class="action-button" mat-mini-fab color="warn">
           <mat-icon aria-hidden="false">delete</mat-icon>
+        </button>
+        <button class="action-button" mat-mini-fab color="primary"
+                (click)="openOrder(order.id)">
+          <mat-icon aria-hidden="false">edit</mat-icon>
         </button>
       </td>
       <td mat-footer-cell *matFooterCellDef> </td>
@@ -51,7 +61,7 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="orders-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let order; columns: displayedColumns;"
         [class.example-expanded-row]="expandedOrder === order"></tr>
     <tr mat-row *matRowDef="let order; columns: ['expandedDetail']"

@@ -4,6 +4,7 @@ import {OrdersService} from "../../services/orders.service";
 import {fromEvent} from "rxjs";
 import {SharedVariablesService} from "../../services/shared-variables.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-orders',
@@ -22,17 +23,21 @@ export class OrdersComponent implements OnInit {
   expandedOrder: IOrder = {} as IOrder;
   orders: IOrder[] = [] as IOrder[];
   filteredOrders: IOrder[] = [] as IOrder[];
-  displayedColumns: string[] = ["CustomerName", "AddressFrom", "AddressTo", "Services", "Actions"];
+  displayedColumns: string[] = ["Expander", "CustomerName", "AddressFrom", "AddressTo", "Services", "Actions"];
 
   constructor(private ordersService: OrdersService,
-              private sharedVariables: SharedVariablesService) {
+              private sharedVariables: SharedVariablesService,
+              private router: Router) {
     this.getOrders();
   }
 
   ngOnInit(): void {
     this.sharedVariables.searchingOrder$.subscribe(searchStr => {
       this.filteredOrders = this.orders.filter(x =>
-        x.customer.name.toUpperCase().includes(searchStr.toUpperCase()));
+        x.customer.name.toUpperCase().includes(searchStr.toUpperCase())
+        || x.addressFrom.city.toUpperCase().includes(searchStr.toUpperCase())
+        || x.addressTo.city.toUpperCase().includes(searchStr.toUpperCase())
+      );
     })
   }
 
@@ -40,5 +45,13 @@ export class OrdersComponent implements OnInit {
     this.ordersService.getOrders().subscribe(orders => {
       this.orders = this.filteredOrders = orders;
     })
+  }
+
+  openOrder(orderId: string) {
+    var order = this.orders.find(o => o.id === orderId);
+    if (order) {
+      this.sharedVariables.order$.next(order);
+      this.router.navigate(['/order', {id: orderId}]);
+    }
   }
 }

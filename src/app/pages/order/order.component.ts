@@ -4,6 +4,8 @@ import {IAddress} from "../../interfaces/IAddress";
 import {EServiceType} from "../../interfaces/EServiceType";
 import {IService} from "../../interfaces/IService";
 import {OrdersService} from "../../services/orders.service";
+import {ActivatedRoute} from "@angular/router";
+import {SharedVariablesService} from "../../services/shared-variables.service";
 
 @Component({
   selector: 'app-order',
@@ -16,10 +18,17 @@ export class OrderComponent implements OnInit {
   isValidForm: boolean = false;
   order: IOrder = {} as IOrder;
 
-  constructor(private ordersService:OrdersService) {
+  constructor(private ordersService:OrdersService,
+              private route: ActivatedRoute,
+              private sharedVariables:SharedVariablesService) {
   }
 
   ngOnInit(): void {
+    this.sharedVariables.order$.subscribe(order=>{
+      if(order){
+        this.order = order;
+      }
+    });
   }
 
   showCustomers() {

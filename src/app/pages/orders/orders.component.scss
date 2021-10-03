@@ -9,6 +9,22 @@ table{
 }
 .action-button{
   margin: 0 5px;
+  float: right;
+}
+
+.orders-header{
+  background-color: #efefef;
+  border-color: lightslategrey;
+  .mat-header-cell{
+    font-size: 1.2em;
+  }
+}
+
+.page-title{
+  padding: 0 0 0 20px;
+  h2{
+    font-size: 1.8em;
+  }
 }
 
 //expanded row
@@ -33,4 +49,8 @@ tr.example-element-row:not(.example-expanded-row):active {
   display: flex;
 }
 
-
+.text-link{
+  color: dodgerblue;
+  text-decoration: underline;
+  cursor: pointer;
+}

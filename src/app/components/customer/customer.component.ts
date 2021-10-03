@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICustomer} from "../../interfaces/ICustomer";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Validators} from '@angular/forms';
@@ -15,7 +15,8 @@ export class CustomerComponent implements OnInit {
 
   customerForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    phoneNumber: new FormControl('', Validators.required),
+    phoneNumber: new FormControl('',
+      [Validators.required,Validators.minLength(8)]),
     emailAddress: new FormControl('', Validators.email),
   });
 
@@ -26,7 +27,16 @@ export class CustomerComponent implements OnInit {
     this.customerForm.valueChanges.subscribe(val => {
       let customer = this.customerForm.value;
       this.customerChange.next(customer);
-    })
+    });
+    if (this.customer) {
+      setTimeout(()=> {
+        this.customerForm.patchValue({
+          name: this.customer.name,
+          phoneNumber: this.customer.phoneNumber,
+          emailAddress: this.customer.emailAddress,
+        });
+      });
+    }
   }
 
 
