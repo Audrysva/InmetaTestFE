@@ -9,7 +9,7 @@ import {IAddress} from "../../interfaces/IAddress";
 })
 export class AddressComponent implements OnInit {
 
-  @Input() addressType = {} as IAddress;
+  @Input() address = {} as IAddress;
   @Output() addressChange = new EventEmitter<IAddress>();
 
 
@@ -24,6 +24,10 @@ export class AddressComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.addressForm.valueChanges.subscribe(val => {
+      let address = this.addressForm.value;
+      this.addressChange.next(address);
+    })
   }
 
 }

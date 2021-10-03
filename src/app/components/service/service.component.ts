@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IService} from "../../interfaces/IService";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {IAddress} from "../../interfaces/IAddress";
 
 @Component({
   selector: 'app-service',
@@ -11,9 +12,9 @@ export class ServiceComponent implements OnInit {
 
   @Input() serviceTypeId = 0;
   @Input() selectedServiceId = 0;
+  @Output() serviceChange = new EventEmitter<IService>();
 
   serviceForm = new FormGroup({
-    isActive: new FormControl(false),
     dateFrom: new FormControl('',Validators.required),
     dateTo: new FormControl('')
   });
@@ -23,6 +24,11 @@ export class ServiceComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.serviceForm.valueChanges.subscribe(val => {
+      let service = this.serviceForm.value;
+      service.typeId = this.serviceTypeId;
+      this.serviceChange.next(service);
+    });
   }
 
   setService(checked:boolean){

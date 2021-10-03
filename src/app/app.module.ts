@@ -12,11 +12,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {ApplicationPipesModule} from "./Pipes/app-pipes-module";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { HeaderComponent } from './orderUi/header/header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

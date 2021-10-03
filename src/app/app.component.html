@@ -1,19 +1,2 @@
-<mat-toolbar>
-  <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="'/'">Bestillings</button>
-    <button mat-menu-item [routerLink]="'customers'">Kunder</button>
-    <button mat-menu-item>Adresser</button>
-  </mat-menu>
-  <span class="nev-element" [routerLink]="'/'">Inmeta</span>
-  <button class="nev-element" mat-raised-button color="primary" [routerLink]="'order'" >
-    Opprett ny bestilling
-  </button>
-  <span class="example-spacer"></span>
-  <mat-form-field floatLabel="never" class="search-top">
-    <input matInput placeholder="Søk etter navn">
-  </mat-form-field>
-</mat-toolbar>
+<app-header></app-header>
 <router-outlet></router-outlet>

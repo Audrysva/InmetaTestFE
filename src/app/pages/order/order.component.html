@@ -8,7 +8,7 @@
     <ng-template matStepLabel>Kunde</ng-template>
     <ng-template matStepContent>
       Legg til ny kunde eller velg fra<button mat-button (click)="showCustomers()">eksisterende kunder</button>
-      <app-customer></app-customer>
+      <app-customer [(customer)]="order.customer"></app-customer>
       <button mat-button matStepperNext>Neste</button>
     </ng-template>
   </mat-step>
@@ -18,11 +18,11 @@
       <div class="inline-form">
         <div class="address-form">
           <h3>Legg til ny "Adresse fra" eller velg fra<button mat-button (click)="showAddresses()">eksisterende adresser</button></h3>
-          <app-address [addressType]="order.addressFrom" (addressChange)="addrssFromChanged($event)" ></app-address>
+          <app-address [address]="order.addressFrom" (addressChange)="addrssFromChanged($event)" ></app-address>
         </div>
         <div class="address-form">
         <h3>Legg til ny "Adresse til" eller velg fra<button mat-button (click)="showAddresses()">eksisterende adresser</button></h3>
-          <app-address [addressType]="order.addressTo" (addressChange)="addrssToChanged($event)"></app-address>
+          <app-address [address]="order.addressTo" (addressChange)="addrssToChanged($event)"></app-address>
         </div>
       </div>
       <button mat-button matStepperPrevious>Tilbake</button>
@@ -32,9 +32,9 @@
   <mat-step>
     <ng-template matStepLabel>Tjenester</ng-template>
     <p>Check the services</p>
-    <app-service [serviceTypeId]="EServiceType.Packing"></app-service>
-    <app-service [serviceTypeId]="EServiceType.Moving"></app-service>
-    <app-service [serviceTypeId]="EServiceType.Cleaning"></app-service>
+    <app-service [serviceTypeId]="EServiceType.Packing" (serviceChange)="serviceChanged($event)"></app-service>
+    <app-service [serviceTypeId]="EServiceType.Moving" (serviceChange)="serviceChanged($event)"></app-service>
+    <app-service [serviceTypeId]="EServiceType.Cleaning" (serviceChange)="serviceChanged($event)"></app-service>
     <button mat-button matStepperPrevious>Tilbake</button>
     <button mat-button matStepperNext>Neste</button>
   </mat-step>
@@ -52,6 +52,7 @@
 
   <mat-card-actions>
     <button mat-raised-button [routerLink]="'/'">Avbryt</button>
-    <button mat-raised-button [disabled]="!isValidForm" color="primary">Lagre bestillingen</button>
+    <button mat-raised-button [disabled]="!isValidForm" color="primary"
+            (click)="saveOrder()">Lagre bestillingen</button>
   </mat-card-actions>
 </mat-card>

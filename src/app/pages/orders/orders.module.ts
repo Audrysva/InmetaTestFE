@@ -14,10 +14,11 @@ import {AddressPipe} from "../../Pipes/address.pipe";
 import {ServicesPipe} from "../../Pipes/services.pipe";
 import {ServiceUiComponent} from "../../orderUi/service/service.component";
 import {ApplicationPipesModule} from "../../Pipes/app-pipes-module";
+import {OrderDetailsComponent} from "../../components/order-details/order-details.component";
 
 @NgModule({
   declarations: [
-    OrdersComponent,AddressPipe,ServicesPipe,ServiceUiComponent
+    OrdersComponent,AddressPipe,ServicesPipe,ServiceUiComponent, OrderDetailsComponent
   ],
   imports: [
     CommonModule,

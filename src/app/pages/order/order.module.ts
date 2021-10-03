@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderComponent } from './order.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
@@ -40,7 +40,8 @@ import {ApplicationPipesModule} from "../../Pipes/app-pipes-module";
     MatCardModule,
     MatButtonModule,
     OrderRoutingModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    FormsModule
   ],
   providers:[MatDatepickerModule]
 })

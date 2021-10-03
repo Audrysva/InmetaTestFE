@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICustomer} from "../../interfaces/ICustomer";
 import {FormControl, FormGroup} from "@angular/forms";
-import { Validators } from '@angular/forms';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-customer',
@@ -10,17 +10,24 @@ import { Validators } from '@angular/forms';
 })
 export class CustomerComponent implements OnInit {
 
-  customer:ICustomer = {} as ICustomer;
+  @Input() customer: ICustomer = {} as ICustomer;
+  @Output() customerChange = new EventEmitter<ICustomer>();
 
   customerForm = new FormGroup({
-    name: new FormControl('',Validators.required),
-    phoneNumber: new FormControl('',Validators.required),
-    emailAddress: new FormControl('',Validators.email),
+    name: new FormControl('', Validators.required),
+    phoneNumber: new FormControl('', Validators.required),
+    emailAddress: new FormControl('', Validators.email),
   });
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-
+    this.customerForm.valueChanges.subscribe(val => {
+      let customer = this.customerForm.value;
+      this.customerChange.next(customer);
+    })
   }
+
+
 }

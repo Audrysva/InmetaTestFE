@@ -2,12 +2,12 @@
 import {IAddress} from "./IAddress";
 import {IService} from "./IService";
 
-export interface IOrderDto {
+export interface IOrderDtoy {
   id: string,
   customer: ICustomer,
-  AddressFrom: IAddress,
-  AddressTo: IAddress,
-  OrderNotes: string,
-  CreatedAt: Date,
-  Services: IService[]
+  addressFrom: IAddress,
+  addressTo: IAddress,
+  orderNotes: string,
+  createdAt: Date,
+  services: IService[]
 }
