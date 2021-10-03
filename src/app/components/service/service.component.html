@@ -1,0 +1,27 @@
+<div >
+  <form class="form-inline" [formGroup]="serviceForm">
+  <mat-checkbox class="example-margin"
+                [checked]="selectedServiceId === serviceTypeId"
+                [color]="'primary'"
+                (change)="setService($event.checked)">
+    {{serviceTypeId | serviceName}}
+  </mat-checkbox>
+
+<div *ngIf="isActive">
+  <mat-form-field class="form-control" appearance="outline">
+    <mat-label>Dato fra</mat-label>
+    <input matInput [matDatepicker]="picker1" formControlName="dateFrom">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="form-control" appearance="outline">
+    <mat-label>Dato til</mat-label>
+    <input matInput [matDatepicker]="picker2" formControlName="dateTo">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+</div>
+  </form>
+</div>
